@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script defer src="app.js"></script>
+</head>
+<body>
+    <style>
+        .border-red {
+          border-color: red;
+        }
+  
+        .border-green {
+          border-color: green;
+        }
+      </style>
+
+    <h1>Vue</h1>
+    <div id="app">
+        <p>salut {{ firstname }} {{ name }}, et {{ age.monage }} ans</p>
+
+        <div>{{ message }}</div>
+        <!-- v-if affiche si la condition est remplis(ici uniquement en true) -->
+        <p v-if="admin">vous êtes admin</p>
+        <p v-if="pasadmin">vous êtes pas admin</p>
+        <p v-if="age.monage >= 18">vous êtes majeur</p>
+        <p v-for="user in users">{{ user }}</p>
+
+        <p>{{ email }}</p>
+        <!-- on bind l'attribut -->
+        <button :disabled="email.length > 10">valider</button>
+        <br>
+        <a :href="url">Link</a>
+        <br>
+        <!-- v-model change la valeur de data() a chaque modification, changement bidirectionnel -->
+        <input type="text" v-model="email" />
+
+        <input type="text" v-model="email"
+        :style="{ borderColor: email.length < 300 ? 'red' : 'green'}"/>
+
+        <input type="text" v-model="name"
+        :class="[ name.length < 3 ? 'border-red' : 'border-green']"/>
+
+        <br>
+        <button @click="count++">+ 1</button>
+        <button @click="incrementcount">+ 1</button>
+        <p>Vous cliquez {{ count }} fois</p>
+    </div>
+
+</body>
+</html>

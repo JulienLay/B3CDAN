@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        input:focus {
+            outline: none !important;
+        }
+        
+        .border-red {
+            border-color: red;
+        }
+        
+        .border-green {
+            border-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p>
+            Salut {{ name }} tu as {{ age }} ans ! {{ user.firstname }} {{ user.lastname }}
+        </p>
+
+        <div v-show="admin">Vous êtes administrateur.</div>
+
+        <div v-if="age < 18">
+            Désolé, vous devez être majeur pour accéder au site
+        </div>
+        <div v-else>
+            Vous pouvez parcourir le site parce que vous êtes majeur.
+        </div>
+
+        <div>
+            <p><strong>Warning</strong> : {{ message }} {{ name }}</p>
+        </div>
+
+        <div v-for="user in users">{{ user }}</div>
+
+        <div v-for="post in posts" :key="post.id">
+            {{ post.id }} {{ post.title }}
+        </div>
+
+        <p>Votre email : {{ email }}</p>
+
+        <input type="text" v-model="email" :style="{ borderColor: email.length < 3 ? 'red' : 'green'}" />
+
+        <input type="text" v-model="name" :class="[ name.length < 3 ? 'border-red' : 'border-green']" />
+
+        <br /><br />
+
+        <a :href="url">Link</a>
+
+        <button onclick="alert('ok')">Envoyer</button>
+
+        <button @click="increment">+ 1</button>
+        <p>Vous cliquez {{ count }} fois</p>
+
+        <form action="" @submit.prevent="hello">
+            <button type="submit">Envoyer</button>
+        </form>
+
+
+        <!-- Formulaire d'ajout d'utilisateur -->
+        <form action="" @submit.prevent="addUser">
+            <input type="text" v-model="newUser">
+            <button type="submit">Ajouter</button>
+        </form>
+
+        <!-- Liste d'utilisateur -->
+        <ul>
+            <li v-for="user in users2">{{ user.name }}</li>
+        </ul>
+    </div>
+
+    <script>
+        const options = {
+            data() {
+                return {
+                    newUser: "",
+                    users2: [{
+                        name: "Clément"
+                    }, {
+                        name: "JMB"
+                    }, {
+                        name: "Muriel"
+                    }],
+                    count: 0,
+                    backgroundColor: "#FFCC00",
+                    url: "https://www.ecole-ipi.com",
+                    email: "cfrghrthr@e",
+                    message: `il y'a un problème`,
+                    name: "Julien",
+                    age: "22",
+                    admin: true,
+                    users: ["Clément", "Julien", "Sharon"],
+                    posts: [{
+                        id: 1,
+                        title: "Titre"
+                    }, {
+                        id: 2,
+                        title: "Titre"
+                    }, {
+                        id: 3,
+                        title: "Titre "
+                    }, ],
+                    user: {
+                        firstname: "Clément",
+                        lastname: "Barbaza",
+                    },
+                };
+            },
+            methods: {
+                hello() {
+                    console.log("hello");
+                },
+                increment() {
+                    this.count++;
+                    console.log(this.count);
+                },
+                addUser() {
+                    this.users2.push({
+                        name: this.newUser
+                    });
+                    this.newUser = "";
+                }
+            },
+        };
+
+        Vue.createApp(options).mount("#app");
+    </script>
+</body>
+
+</html>

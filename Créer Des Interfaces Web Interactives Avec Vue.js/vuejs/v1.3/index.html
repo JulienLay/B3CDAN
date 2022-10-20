@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script defer src="app.js"></script>
+</head>
+<body>
+    <h1>Vue</h1>
+    <div id="app">
+        <p>salut {{ firstname }} {{ name }}, et {{ age.monage }} ans</p>
+
+        <div>{{ message }}</div>
+        <!-- v-if affiche si la condition est remplis(ici uniquement en true) -->
+        <p v-if="admin">vous êtes admin</p>
+        <p v-if="pasadmin">vous êtes pas admin</p>
+        <p v-if="age.monage >= 18">vous êtes majeur</p>
+    </div>
+
+</body>
+</html>

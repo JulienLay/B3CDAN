@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1 class="title">Vue components</h1>
+
+        <main-menu></main-menu>
+
+        {{ title }}
+
+        <container></container>
+
+        <register-form></register-form>
+
+        <page></page>
+
+        <users :title="title" :users="users"></users>
+
+        <counter></counter>
+    </div>
+
+    <script>
+        let IncrementButton = {
+            props: ["incrementValue"],
+            template: `<button @click.prevent="increment">Increment</button>`,
+            methods: {
+                increment() {
+                    this.$emit("increment", this.incrementValue);
+                },
+            },
+        };
+
+        let Counter = {
+            template: `<div>
+        {{ number }}
+       <increment-button @increment="increment" :incrementValue="incrementValue"></increment-button>
+      </div>`,
+            data() {
+                return {
+                    number: 0,
+                    incrementValue: 2,
+                };
+            },
+            methods: {
+                toto() {
+                    console.log("toto");
+                },
+                increment(incrementValue) {
+                    this.number = this.number + incrementValue;
+                },
+            },
+            components: {
+                IncrementButton,
+            },
+        };
+
+        let Users = {
+            template: `
+        <div>
+            <h4>{{ title }}</h4>
+            <ul>
+        <li v-for="user in users" :key="user.id">{{ user.name}}</li>
+      </ul>
+      </div>`,
+            props: ["title", "users"],
+            data() {
+                return {
+                    name: "Clément",
+                };
+            },
+        };
+
+        let RegisterForm = {
+            template: `<form @submit.prevent="register">
+        <input type="text" v-model="input" />
+        <button type="submit">Envoyer</button>
+      </form>`,
+            data() {
+                return {
+                    input: "toto",
+                };
+            },
+            methods: {
+                register() {
+                    console.log("register");
+                },
+            },
+        };
+
+        let MainMenu = {
+            template: `<aside>Menu</aside>`,
+        };
+
+        let ContainerTitle = {
+            template: `<h3 class="title">{{ title }} {{ name }}</h3>`,
+            data() {
+                return {
+                    title: "Subtitle",
+                    name: "Clément",
+                };
+            },
+        };
+
+        let Container = {
+            template: `<main>
+ 
+            <container-title></container-title>
+ 
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia,
+            exercitationem, hic ducimus, eaque consequuntur atque voluptas optio
+            aperiam explicabo illo ad. Accusantium ullam asperiores dolore
+            adipisci culpa sint ab est?
+            </p>
+        </main>`,
+            components: {
+                ContainerTitle,
+            },
+        };
+
+        const options = {
+            data() {
+                return {
+                    users: [],
+                    title: "Title parent",
+                    number: 0,
+                };
+            },
+
+            components: {
+                MainMenu,
+                Container,
+                RegisterForm,
+                Users,
+                Counter,
+            },
+            mounted() {
+                console.log("mounted");
+                fetch("https://jsonplaceholder.typicode.com/users").then(
+                    (response) => {
+                        response.json().then((data) => {
+                            console.log(data);
+                            this.users = data;
+                        });
+                    }
+                );
+            },
+            beforeUpdate() {
+                console.log("beforeUpdate");
+            },
+        };
+
+        const app = Vue.createApp(options);
+
+        app.component("page", {
+            template: "<p>lorem ipsum</p><div>Div</div>",
+        });
+
+        app.mount("#app");
+    </script>
+</body>
+
+</html>

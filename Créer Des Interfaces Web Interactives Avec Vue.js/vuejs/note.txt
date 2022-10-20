@@ -1,0 +1,38 @@
+bonne doc js pour avoir les bases de javascript
+https://developer.mozilla.org/fr/docs/Web/JavaScript
+
+doc vuejs
+https://vuejs.org/guide/introduction.html
+https://fr.vuejs.org/v2/guide/
+
+V1.1====================
+• Pour installer vue, on peut utiliser npm ou l'importer avec l'url(en utilisant "defer" en attribut pour le charger après le dom)
+• Vue est un objet qui possède des méthodes.
+• on utilise Vue.createApp({}) pour créer une application
+• createApp() peut prendre comme argument des données, que l'on va fournir grace a la fonction data() qui va return une liste de clé/valeur.
+• On rend ensuite ses données disponibles sur une balise de code grace a ".mount" qui prend en argument un id.
+• On pourra utiliser ces données grace aux moustaches dans le html {{ madata }}
+V1.2====================
+• on peut créer une liste de clé/valeur dans une autre clé/valeur
+V1.3====================
+• pour créer une condition dans l'html, on utilise "v-if" en attribut html avec comme valeur d'attribut la condition
+V1.4====================
+• pour créer une boucle dans l'html, on utilise "v-for" en attribut html avec comme valeur d'attribut ce que l'on itère
+V1.5====================
+• on donne la valeur d'un attribut en utilisant la data fournis par  data(). On dit qu'on bind un attribut.
+V1.6====================
+Actuellement, les données sont unidirectionnel de data() vers le HTML.
+• avec l'attribut "v-model" dans une balise html, la donnée devient bidirectionnel et un changement de valeur dans le html change la valeur de data(). Cela ne fonctionne que dans des inputs.
+attribut.
+V1.7====================
+• On peut utiliser des fonctions ternaire pour choisir la valeur d'un attribut html, par exemple pour du css.
+border-color n'est pas compris par Vuejs, il faudra écrire borderColor en camelCase qui sera interprété automatiquement.
+V1.8====================
+• On peut utiliser des fonctions ternaire pour choisir une classe de balise html
+V1.9====================
+• pour écouter le click, on va écrire la syntaxe @click.
+• on peut auto-incrémenter en précisant le nom_de_la_clé++, ou en utilisant une fonction, qui sera fournis dans createApp avec la clé par défaut "methods"
+
+V2.1====================
+petite application qui utilise tous ce qui est vu précédement.
+ligne15 "@submit.prevent" écoute submit et enleve le comportement par défaut(preventDefault()), ainsi il n'y a pas de requête http à la validation du formulaire
