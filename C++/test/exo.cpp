@@ -10,6 +10,7 @@ void decouperMinutes(int);
 */
 
 // 1ère version : affichage dans la fonction
+
 void decouperMinutes(int minu) {
     int heures = 0, minutes = 0;
 
@@ -20,14 +21,31 @@ void decouperMinutes(int minu) {
     cout << "Il y a " << heures << " heure(s) et " << minutes << " minute(s) dans " << minu << " minute(s) !";
 }
 
+int main(int argc, char * argv[])
+{
+    decouperMinutes(90);
+    return 0;
+}
+
+
 // 2ème version : on crée 2 variables (pour heures et minutes) dans le code appelant (main) et on les met à jour dans la fonction et on les affiches dans le main
 //void decouperMinutes(int minutes) {
 
 
 //}
 
+int decouperMinutes(int heures, int minutes) {
+    int minu = 0;
+
+    minu = heures*60 + minutes;
+
+    return minu;
+}
+
 int main(int argc, char * argv[])
 {
-    decouperMinutes(90);
+    int heures = 1, minutes = 30;
+    int minu = decouperMinutes(heures, minutes);
+    cout << "Il y a " << minu << " minute(s) dans " << heures << " heure(s) et " << minutes << " minute(s) !";
     return 0;
 }
