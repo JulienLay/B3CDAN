@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js" defer></script>
+
+    <style>
+      body {
+        margin: 0 auto;
+        max-width: 700px;
+        padding: 0 2em;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <mon-title :tata="tasks"></mon-title>
+
+      <formulaire @create="createTask"></formulaire>
+
+      <p v-if="!tasks.length">
+        😔 <i>Vous n'avez pas encore créé de task. This is so sad</i> 😔
+      </p>
+
+      <tasks :toto="tasks" @delete="deleteTask" @edit="editTask"></tasks>
+    </div>
+  </body>
+</html>

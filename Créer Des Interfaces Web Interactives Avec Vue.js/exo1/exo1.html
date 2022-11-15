@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css">
+</head>
+
+<body>
+    <div id="app">
+        <h1>Recette de cuisine</h1>
+
+        <!-- Formulaire d'ajout d'utilisateur -->
+
+        <form action="" @submit.prevent="enregistrerRecette">
+            <h4>Créer une recette</h4>
+
+            <label for="text">Nom</label>
+            <input type="text" id="nom" />
+
+            <label for="text">Ingrédients</label>
+            <textarea name="" id="ingredients" cols="30" rows="10"></textarea>
+
+            <label for="text">Préparation</label>
+            <textarea name="" id="preparation" cols="30" rows="10"></textarea>
+
+            <label for="text">Temps de préparation (en minutes)</label>
+            <input type="number" id="temps" />
+
+            <label for="text">Nombre de personnes</label>
+            <input type="number" id="personnes" />
+
+            <button type="submit">Ajouter la recette</button>
+        </form>
+
+        <!-- Liste de recettes -->
+        <h3>Mes recettes</h3>
+
+        <recette></recette>
+    </div>
+
+    <script>
+        let Recette = {
+            template: `
+            <h5>{{recette.nom}}</h5>
+        <ul>
+            <li><b>Ingrédients</b> : {{recette.ingredients}}</li>
+            <li><b>Préparation</b> : {{recette.preparation}}</li>
+            <li><b>Temps de préparation</b> : {{recette.temps}} minutes</li>
+            <li><b>Nombre de personnes</b> : {{recette.personnes}} personnes</li>
+        </ul>
+        <button>Supprimer la recette</button>
+            `
+        };
+
+        const options = {
+            data() {
+                return {
+                    listeRecette: [{}, {}],
+                    recette: {
+                        nom: "",
+                        ingredients: "",
+                        preparation: "",
+                        temps: "",
+                        personnes: ""
+                    },
+                };
+            },
+            components: {
+                Recette
+            },
+            methods: {
+                enregistrerRecette() {
+                    let nom = document.getElementById("nom").value;
+                    this.recette.nom = nom;
+
+                    let ingredients = document.getElementById("ingredients").value;
+                    this.recette.ingredients = ingredients;
+
+                    let preparation = document.getElementById("preparation").value;
+                    this.recette.preparation = preparation;
+
+                    let temps = document.getElementById("temps").value;
+                    this.recette.temps = temps;
+
+                    let personnes = document.getElementById("personnes").value;
+                    this.recette.personnes = personnes;
+                }
+            },
+        };
+
+        Vue.createApp(options).mount("#app");
+    </script>
+</body>
+
+</html>

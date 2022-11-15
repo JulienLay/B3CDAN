@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js" defer></script>
+
+    <style>
+      body {
+        margin: 0 auto;
+        max-width: 640px;
+        padding: 0 2em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Mes recettes de cuisine</h1>
+
+      <form @submit.prevent="createRecipe">
+        <h3>Créer une recette</h3>
+
+        <label for="name">Nom</label>
+        <input type="text" id="name" v-model="recipe.name" required />
+
+        <label for="ingredients">Ingrédients</label>
+        <textarea
+          id="ingredients"
+          v-model="recipe.ingredients"
+          required
+        ></textarea>
+
+        <label for="preparation">Préparation</label>
+        <textarea
+          id="preparation"
+          v-model="recipe.preparation"
+          required
+        ></textarea>
+
+        <label for="time">Temps de préparation (en min.)</label>
+        <input type="number" id="time" v-model="recipe.time" required />
+
+        <label for="persons">Nombre de personnes</label>
+        <input type="number" id="persons" v-model="recipe.persons" required />
+
+        <button type="submit" :disabled="!this.recipe.name">Créer</button>
+      </form>
+
+      <p v-if="!this.recipes.length">
+        😔 <i>Vous n'avez pas encore créé de recette.</i>
+      </p>
+
+      <div v-for="recipe in recipes" :key="recipe.id">
+        <h4>{{ recipe.name }}</h4>
+
+        <ul>
+          <li>Temps de préparation : {{ recipe.time }} min</li>
+          <li>Nombre de personnes : {{ recipe.persons }}</li>
+        </ul>
+
+        <p>{{ recipe.ingredients }}</p>
+
+        <p>{{ recipe.preparation }}</p>
+
+        <a href="#" @click.prevent="deleteRecipe(recipe)"><i>Supprimer</i></a>
+      </div>
+    </div>
+  </body>
+</html>
