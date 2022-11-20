@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cocktailpedia</title>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js" defer></script>
+
+    <style>
+      body {
+        margin: 0 auto;
+        max-width: 700px;
+        padding: 0 2em;
+        text-align: center;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 0.25em 0.4em;
+        font-size: 75%;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: 0.25rem;
+        position: relative;
+        top: -1px;
+        padding-right: 0.6em;
+        padding-left: 0.6em;
+        border-radius: 10rem;
+        color: #212529;
+        background-color: #ffc107;
+      }
+/*
+      #cocktail {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      #cocktail form {
+        margin: 50px;
+      }
+
+      #cocktail img {
+        width: 250px;
+      }*/
+    </style>
+  </head>
+  <body>
+    <div id="app">
+        
+        <random-cocktail-form @generate="setCocktails" @aaa="setCocktails"></random-cocktail-form>
+
+        <cocktail-by-ingredient-form @generate="setCocktails"></cocktail-by-ingredient-form>
+        
+        <cocktail-by-name-form @generate="setCocktails"></cocktail-by-name-form>
+        
+        <h1>{{cocktails != null ? cocktails.length : 0}} résultat{{cocktails != null && cocktails.length > 1 ? "s" : ""}}</h1>
+        
+        <div id="cocktail">
+            <p v-if="cocktails==null">
+                😔<i>Votre recherche n'a donné aucun résultat...</i>😔
+            </p>
+
+            <cocktail-description v-else
+            v-for="cocktail in cocktails" :key="cocktail.idDrink" 
+            :cocktail="cocktail">
+            </cocktail-description>
+        </div>
+
+        <p v-if="cocktails!=null && cocktails.length==0">
+            <i>Vous n'avez pas encore recherché de cocktail.</i>
+        </p>
+
+    </div>
+  </body>
+</html>
