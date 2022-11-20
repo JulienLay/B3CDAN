@@ -1,3 +1,0 @@
-- gestion des erreurs pour quand on recherche par nom et quand on recherche par ingrédient
-- bouton pour sans alcool
-- utilisation de Vue Router
