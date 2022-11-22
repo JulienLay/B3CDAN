@@ -7,6 +7,7 @@ const RandomCocktailForm = {
   },
 
   methods: {
+    // on génère un cocktail de manière aléatoire dans l'API
     generateRandomCocktail() {
       fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php").then(
         (response) => {
@@ -17,18 +18,22 @@ const RandomCocktailForm = {
       );
     },
 
+    // retourne un cocktail sans alcool au hasard dans l'API
     generateRandomNonAlcoholicCocktail() {
+      // récupère les cocktails sans alcool mais avec une partie des données d'un cocktail
       fetch(
         "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic"
       ).then((response) => {
         response.json().then((data) => {
           this.nonAlcoholicCocktails = data.drinks;
 
+          // on prend un cocktail au hasard
           this.randomNonAlcoholicCocktail =
             this.nonAlcoholicCocktails[
               Math.floor(Math.random() * this.nonAlcoholicCocktails.length)
             ];
 
+          // permet de emit les détails du cocktail avec l'id du cocktail pris au hasard précédemment
           fetch(
             "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" +
               this.randomNonAlcoholicCocktail.idDrink
@@ -61,6 +66,7 @@ const CocktailByIngredientForm = {
     };
   },
 
+  // pour tester si on a selectionné un élément de la liste déroulante
   computed: {
     isValid() {
       return this.selected != null && this.selected != "";
@@ -68,6 +74,7 @@ const CocktailByIngredientForm = {
   },
 
   methods: {
+    // si this.isValid est faux, on fait un return pour ne pas exécuter la suite (le fetch)
     getCocktailsFromIngredient() {
       this.hasError = false;
       if (!this.isValid) {
@@ -75,6 +82,7 @@ const CocktailByIngredientForm = {
         return;
       }
 
+      // récupère les cocktails basé sur l'ingrédient mais avec une partie des données d'un cocktail
       fetch(
         "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" +
           this.selected
@@ -95,6 +103,8 @@ const CocktailByIngredientForm = {
               cocktailIds.push(cocktailsBasedOnIngredient[i].idDrink);
             }
 
+            // permet de récuprer toutes les données d'un cocktail grâce à son id
+            // on parcours donc le tableau cocktailsWithIds qui contient les cocktails qu'on veut afficher par la suite
             for (let i = 0; i < cocktailIds.length; i++) {
               fetch(
                 "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" +
@@ -112,6 +122,7 @@ const CocktailByIngredientForm = {
             this.$emit("generate", null);
           });
       });
+      // on remet les datas à 0 (sauf hasError qui doit rester false)
       this.ingredient = [];
       this.selected = "";
       this.cocktailsWithIds = [];
@@ -119,6 +130,7 @@ const CocktailByIngredientForm = {
   },
 
   mounted() {
+    // récupère la liste des ingrédients de l'API
     fetch("https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list").then(
       (response) => {
         response.json().then((data) => {
@@ -151,6 +163,7 @@ const CocktailByNameForm = {
     };
   },
 
+  // pour tester si on a un élément qui a été entré dans le champ du formulaire
   computed: {
     isValid() {
       return this.search != null && this.search != "";
@@ -158,12 +171,14 @@ const CocktailByNameForm = {
   },
 
   methods: {
+    // si this.isValid est faux, on fait un return pour ne pas exécuter la suite (le fetch)
     generateByName() {
       this.hasError = false;
       if (!this.isValid) {
         this.hasError = true;
         return;
       }
+      // on recherche un cocktail par son nom
       fetch(
         "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" +
           this.search
@@ -198,6 +213,8 @@ const CocktailDescription = {
     </ul>
     </form>`,
 
+  // permet de retourner le tableau avec tous les ingrédients qui ne sont pas null pour un cocktail
+  // le but est de faire un affichage seulement des ingrédients qui ne sont pas à null
   computed: {
     ingredients() {
       let ingredients = [];
@@ -221,6 +238,7 @@ const options = {
   },
 
   methods: {
+    // permet de récuperer le tableau de chaque composant avec ce qu'il fait et de l'afficher
     setCocktails(cocktails) {
       this.cocktails = cocktails;
     },
