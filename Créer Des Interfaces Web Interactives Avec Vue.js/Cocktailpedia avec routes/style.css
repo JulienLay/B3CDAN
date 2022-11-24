@@ -1,0 +1,84 @@
+body {
+  margin: 0 auto;
+  max-width: 700px;
+  padding: 0 2em;
+  text-align: center;
+  font-family: "Montserrat";
+}
+
+header {
+    padding-bottom: 0px;
+}
+
+nav {
+  margin-bottom: 0px;
+}
+
+nav a {
+  font-size: 25px;
+}
+
+ul {
+  list-style-type: space-counter;
+}
+
+li {
+  text-align: left;
+}
+
+/* Pour le badge dans la description des cocktails */
+
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  position: relative;
+  top: -1px;
+  padding-right: 0.6em;
+  padding-left: 0.6em;
+  border-radius: 10rem;
+  color: #212529;
+  background-color: #ffc107;
+}
+
+/* Pour la mise en forme de la description des cocktails */
+
+#cocktails {
+  display: flex;
+  flex-direction: column;
+}
+
+#cocktail {
+  border-color: red;
+  text-align: center;
+  margin : 15px;
+}
+
+/* Pour la page credits */
+
+#outils {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Pour les images */
+
+#outils img {
+  width: 300px;
+}
+
+#cocktail img {
+  width: 250px;
+}
+
+#notfound img {
+    width: 600px;
+}
