@@ -8,7 +8,7 @@ const CreditsView = {
     <li>L'utilisation de Vue Router et de sa <a href="https://router.vuejs.org/introduction.html" target="_blank">documentation</a></li>
   </ul>
 
-  <i>PS : Essayez de changer la fin de l'URL pour consulter la page 404 😱<i>
+  <i>PS : Essayez de changer la fin de l'URL pour consulter la page 404 😱</i>
 
   <div id="outils">
     <img src="https://positivethinking.tech/wp-content/uploads/2021/01/Logo-Vuejs.png"/>

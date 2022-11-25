@@ -4,6 +4,13 @@ body {
   padding: 0 2em;
   text-align: center;
   font-family: "Montserrat";
+  background-image: url("https://i.pinimg.com/originals/1a/9c/db/1a9cdb4a7241f43d247a51bb3cd2f932.jpg");
+  background-size: 10%;
+}
+
+#app {
+  background-color: white;
+
 }
 
 header {
