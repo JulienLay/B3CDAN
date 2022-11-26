@@ -10,6 +10,7 @@ const routes = [
 
 const router = VueRouter.createRouter({
   // history: VueRouter.createWebHistory(),
+  // J'ai utilisé createWebHashHistory au lieu de createWebHistory car sinon la page redirige vers la page 404 
   history: VueRouter.createWebHashHistory(),
   routes,
 });
