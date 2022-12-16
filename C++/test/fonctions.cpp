@@ -9,7 +9,7 @@ void decouperMinutes(int minu) {
 
     minutes = minu%60;
 
-    cout << "Il y a " << heures << " heure(s) et " << minutes << " minute(s) dans " << minu << " minute(s) !";
+    cout << "Il y a " << heures << " heure(s) et " << minutes << " minute(s) dans " << minu << " minute(s) !"<< endl;
 
     return;
 }
